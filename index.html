@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licencias de Software - Trabajo ADSO 2026</title>
+    <title>Elicitación de Requisitos - ADSO 2026</title>
     <style>
         :root {
-            --primary: #1e293b;
-            --secondary: #0f172a;
-            --accent: #3b82f6;
-            --accent-light: #ef4444;
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #334155;
-            --text-dark: #0f172a;
-            --border-color: #e2e8f0;
+            --primary: #2c3e50;
+            --accent: #16a085;
+            --background: #f4f7f6;
+            --text: #333333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         * {
@@ -25,82 +22,86 @@
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background-color: var(--background);
+            color: var(--text);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Header & Navigation */
         header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: var(--white);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            sticky: top;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
-        .header-container {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        nav ul {
-            display: flex;
+            justify-content: center;
             list-style: none;
-            gap: 0.5rem;
+            overflow-x: auto;
         }
 
-        nav a {
-            color: #cbd5e1;
+        .nav-container li a {
+            display: block;
+            padding: 1.2rem 1.5rem;
+            color: var(--primary);
             text-decoration: none;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
             font-weight: 500;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            text-align: center;
+            white-space: nowrap;
         }
 
-        nav a:hover, nav a.active {
-            color: white;
-            background-color: var(--accent);
+        .nav-container li a:hover, .nav-container li a.active {
+            color: var(--accent);
+            background-color: rgba(22, 160, 133, 0.05);
+            border-bottom: 3px solid var(--accent);
         }
 
-        /* Main Layout */
         main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
         }
 
-        /* Sections Handling (Interactive SPA) */
-        .content-section {
+        .section-content {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
             display: none;
-            animation: fadeIn 0.4s ease forwards;
+            animation: fadeIn 0.5s ease;
         }
 
-        .content-section.active {
+        .section-content.active {
             display: block;
         }
 
@@ -109,418 +110,246 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cards & Content Styling */
-        .hero-card {
-            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
         }
 
-        .hero-card h2 {
-            font-size: 2.2rem;
+        h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        p {
             margin-bottom: 1rem;
+            text-align: justify;
+            font-size: 1.05rem;
         }
 
-        .hero-card p {
-            color: #e2e8f0;
-            max-width: 800px;
-            font-size: 1.1rem;
+        .highlight-box {
+            background-color: #ebf5fb;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .card h3 {
-            color: var(--text-dark);
-            font-size: 1.3rem;
+        ul {
             margin-bottom: 1rem;
-            border-left: 4px solid var(--accent);
-            padding-left: 0.75rem;
+            padding-left: 1.5rem;
         }
 
-        /* New Emoji Container Styles */
-        .emoji-container {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-top: 1.5rem;
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Espacio para Reacción con Emojis */
+        .emoji-feedback {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ccc;
             text-align: center;
-            padding: 2rem 1rem;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .emoji-display {
-            font-size: 3.5rem;
-            line-height: 1;
-            margin-bottom: 0.75rem;
-            display: block;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
-        }
-
-        .emoji-caption {
-            display: block;
-            color: #475569;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* List Styling for Freedoms and Criteria */
-        .interactive-list {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .interactive-list li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 0.75rem;
-            background: #f8fafc;
-            padding: 1rem 1rem 1rem 2.5rem;
-            border-radius: 8px;
-            border-left: 3px solid #10b981;
-        }
-
-        .interactive-list li strong {
-            color: var(--text-dark);
-            display: inline-block;
-            margin-right: 0.25rem;
-        }
-
-        .interactive-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 1rem;
-            top: 1rem;
-            color: #10b981;
+        .emoji-feedback p {
+            text-align: center;
             font-weight: bold;
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            margin-bottom: 0.8rem;
         }
 
-        /* Specific Highlight for Law Section */
-        .law-box {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+        .emoji-btn {
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: transform 0.2s;
             position: relative;
-            overflow: hidden;
         }
 
-        .law-box::after {
-            content: "§";
-            position: absolute;
-            right: 2rem;
-            bottom: -2rem;
-            font-size: 10rem;
-            color: #dcfce7;
-            font-weight: bold;
-            line-height: 1;
-            z-index: 0;
+        .emoji-btn:hover {
+            transform: scale(1.3);
         }
 
-        .law-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .law-badge {
-            background-color: #16a34a;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        /* Badges for examples */
-        .badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .badge {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
+        .emoji-counter {
+            display: block;
             font-size: 0.85rem;
-            font-weight: 500;
+            color: #555;
+            margin-top: 0.2rem;
         }
 
-        /* Footer */
         footer {
-            background-color: var(--secondary);
-            color: #94a3b8;
+            background-color: var(--primary);
+            color: var(--white);
             text-align: center;
             padding: 1.5rem;
+            font-size: 0.95rem;
             margin-top: auto;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
+            letter-spacing: 1px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero-card {
-                padding: 2rem 1.5rem;
-            }
-            .hero-card h2 {
-                font-size: 1.8rem;
-            }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .nav-container { justify-content: flex-start; }
+            .section-content { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <h1>Licencias de <span>Software</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="nav-link active" data-target="inicio">Inicio</a></li>
-                    <li><a href="#" class="nav-link" data-target="filosofia">Filosofía de Distribución</a></li>
-                    <li><a href="#" class="nav-link" data-target="normativa">Normativa Colombia</a></li>
-                    <li><a href="#" class="nav-link" data-target="tipos">Tipos de Licencias</a></li>
-                    <li><a href="#" class="nav-link" data-target="derechos">Derechos de Autor</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>La Fase de Elicitación de Requisitos</h1>
+        <p>Procesos, Técnicas y Herramientas de Ingeniería de Software</p>
     </header>
 
+    <nav>
+        <ul class="nav-container">
+            <li><a href="#" class="active" onclick="switchTab(event, 'inicio')">Inicio</a></li>
+            <li><a href="#" onclick="switchTab(event, 'planeacion')">1.1 Planeación</a></li>
+            <li><a href="#" onclick="switchTab(event, 'tecnicas')">1.2 Técnicas</a></li>
+            <li><a href="#" onclick="switchTab(event, 'herramientas')">1.3 Herramientas</a></li>
+            <li><a href="#" onclick="switchTab(event, 'modelado')">1.4 Modelado</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <!-- SECCIÓN INICIO -->
-        <section id="inicio" class="content-section active">
-            <div class="hero-card">
-                <h2>Introducción al Licenciamiento</h2>
-                <p>Descubre los fundamentos legales, derechos y deberes que rigen el uso, modificación y distribución del software a nivel nacional e internacional de forma ordenada y cronológica.</p>
-            </div>
+        <!-- INICIO / INTRODUCCIÓN -->
+        <section id="inicio" class="section-content active">
+            <h2>Introducción</h2>
+            <p>A través de este material, se tratan con detalle los pasos que se deben seguir en el proceso de recolección de datos, el uso de técnicas y los instrumentos para tal fin.</p>
+            <p>La recolección de datos se refiere al uso de una gran diversidad de técnicas y herramientas que pueden ser utilizadas por el analista para desarrollar los sistemas de información, las cuales pueden ser la entrevista, la encuesta, el cuestionario, la observación, las sesiones grupales, la recolección documental, entre otras.</p>
+            <p>En ese sentido, los analistas utilizan una variedad de métodos para recopilar los datos sobre una situación existente, como entrevistas, cuestionarios, inspección de registros (revisión en el sitio) y observación. Cada uno tiene ventajas y desventajas; es por ello que, por lo general, se utilizan dos o tres simultáneamente, para complementar el trabajo asegurar una investigación completa.</p>
             
-            <div class="grid-2">
-                <div class="card">
-                    <h3>Licencia de Software</h3>
-                    <p>Cuando se realiza un convenio o contrato entre un desarrollador y un usuario y para el cual el software está sujeto a una propiedad intelectual y derechos de autor, se dice que estamos hablando de una licencia. En ella se establecen detalladamente los derechos y deberes de ambas partes. Depende del desarrollador la selección de la licencia de distribución del software.</p>
-                    <div class="emoji-container">
-                        <span class="emoji-display">📜✍️</span>
-                        <span class="emoji-caption">Convenio y Contrato Legal</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Patente</h3>
-                    <p>Se trata de un derecho exclusivo que proporciona el Estado para la protección de una invención de un nuevo producto (material o inmaterial) dispuesto para ser explotado comercialmente a conveniencia del solicitante por un periodo de tiempo limitado.</p>
-                    <div class="emoji-container">
-                        <span class="emoji-display">💡🛠️</span>
-                        <span class="emoji-caption">Protección de Invenciones</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>Derecho de autor o copyright</h3>
-                <p>Forma de protección proporcionada por las leyes vigentes in la mayoría de los países para los autores de obras originales, incluyendo obras literarias, dramáticas, musicales, artísticas e intelectuales, tanto publicadas como pendientes de publicar.</p>
-                <div class="emoji-container">
-                    <span class="emoji-display">©️⚖️</span>
-                    <span class="emoji-caption">Protección a Obras Originales</span>
-                </div>
+            <div class="emoji-feedback">
+                <p>¿Qué tal te pareció esta sección?</p>
+                <button class="emoji-btn" onclick="addReaction(this)">📘 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">💡 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">✅ <span class="emoji-counter">0</span></button>
             </div>
         </section>
 
-        <!-- SECCIÓN FILOSOFÍA DE DISTRIBUCIÓN -->
-        <section id="filosofia" class="content-section">
-            <div class="grid-2">
-                <div class="card">
-                    <h3>Software Libre</h3>
-                    <p>Permite la libertad absoluta orientada a la comunidad mediante cuatro libertades esenciales:</p>
-                    <ul class="interactive-list">
-                        <li><strong>Correr:</strong> programas para cualquier uso.</li>
-                        <li><strong>Analizar:</strong> el funcionamiento del programa y modificarlo de acuerdo con sus necesidades.</li>
-                        <li><strong>Redistribuir:</strong> copias de la obra.</li>
-                        <li><strong>Realizar y aplicar mejoras:</strong> al programa para beneficio de toda la comunidad.</li>
-                    </ul>
-                    <div class="emoji-container">
-                        <span class="emoji-display">🔓🕊️</span>
-                        <span class="emoji-caption">Las 4 Libertades Comunitarias</span>
-                    </div>
-                </div>
+        <!-- PLANEACIÓN -->
+        <section id="planeacion" class="section-content">
+            <h2>1.1. Planeación</h2>
+            <p>La planeación busca definir las tareas a realizar para elegir y planificar las técnicas a emplear durante la actividad de elicitación de la fase de ingeniería de requisitos del desarrollo de software. En la siguiente tabla se presenta una relación de estas tareas y sus correspondientes procesos.</p>
+            
+            <div class="highlight-box">
+                <strong>Nota del proceso cronológico:</strong> El flujo inicia formalmente aquí, estableciendo la hoja de ruta clara de qué técnicas se van a mapear y utilizar según las características del software.
+            </div>
 
-                <div class="card">
-                    <h3>Software de Fuente Abierta</h3>
-                    <p>Enfoque metodológico con estrictos criterios de distribución definidos:</p>
-                    <ul class="interactive-list" style="border-color: #3b82f6;">
-                        <li><strong>Libre distribución:</strong> Transmisión sin restricciones comerciales.</li>
-                        <li><strong>Intervención del código fuente:</strong> Acceso completo para auditorías y cambios.</li>
-                        <li><strong>Permitir modificaciones:</strong> Admite trabajos derivados bajo las mismas condiciones originales.</li>
-                        <li><strong>Integrar sin discriminación:</strong> No restringe el acceso a personas o grupos específicos.</li>
-                        <li><strong>Tecnológicamente neutral:</strong> La licencia no se supedita a ninguna tecnología o interfaz.</li>
-                    </ul>
-                    <div class="emoji-container">
-                        <span class="emoji-display">🌐💻</span>
-                        <span class="emoji-caption">Criterios de Código Abierto</span>
-                    </div>
-                </div>
+            <div class="emoji-feedback">
+                <p>¿Qué tal te pareció esta sección?</p>
+                <button class="emoji-btn" onclick="addReaction(this)">📝 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">⏳ <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">👍 <span class="emoji-counter">0</span></button>
             </div>
         </section>
 
-        <!-- SECCIÓN NORMATIVA COLOMBIA -->
-        <section id="normativa" class="content-section">
-            <div class="law-box">
-                <div class="law-content">
-                    <span class="law-badge">Marco Legal Nacional</span>
-                    <h3>2.2. Normativa Obligatoria</h3>
-                    <p style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-dark);">Cuando se realiza la implementación de un software, su uso debe estar regido por una normatividad que evitará futuras sanciones o multas.</p>
-                    
-                    <div style="background-color: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a; margin-top: 1.5rem;">
-                        <h4 style="color: var(--text-dark); margin-bottom: 0.5rem;">¿Cumple con la LEY 603?</h4>
-                        <p>En Colombia, la ley que regula las licencias de software es la <strong>Ley 603 de 2000</strong>, la cual recibe el nombre de <strong>Ley para el cumplimiento de las licencias de software</strong>.</p>
-                    </div>
-                </div>
-                <div class="emoji-container" style="background-color: white; margin-top: 2rem;">
-                    <span class="emoji-display">🇨🇴⚖️</span>
-                    <span class="emoji-caption">Ley 603 de 2000 - Colombia</span>
-                </div>
+        <!-- TÉCNICAS E INSTRUMENTOS -->
+        <section id="tecnicas" class="section-content">
+            <h2>1.2 Técnicas e instrumentos para elicitar requisitos</h2>
+            <p>Hay una variedad de técnicas propuestas para ingeniería de requerimientos (Herrera, 2003. p. 12), por lo que es primordial resaltar que estas técnicas pueden ser aplicables a las distintas fases del proceso de la ingeniería de requerimientos (IR), teniendo en cuenta las características propias del proyecto en particular que se esté desarrollándose para aprovechar al máximo su utilidad.</p>
+            <p>A continuación, se presentará una serie de técnicas destinadas a facilitar la elicitación correcta y efectiva de los requisitos dentro de un proceso de desarrollo.</p>
+            
+            <h3>1. Preparación (Pasos de la Entrevista)</h3>
+            <ul>
+                <li>El entrevistador debe documentarse e investigar la situación de la organización, analizando los documentos de la empresa disponible.</li>
+                <li>Se debe intentar minimizar el número de entrevistados, considerando las entrevistas de cortesía.</li>
+                <li>Analizar el perfil de los entrevistados.</li>
+                <li>Definir el objetivo y el contenido de la entrevista.</li>
+                <li>Planificar el lugar y la hora en la que se va a desarrollar la entrevista (es conveniente realizarla en un lugar confortable).</li>
+                <li>Algunos proponen enviar previamente el entrevistado un cuestionario y un pequeño documento de introducción al proyecto de desarrollo.</li>
+            </ul>
+
+            <div class="emoji-feedback">
+                <p>¿Qué tal te pareció esta sección?</p>
+                <button class="emoji-btn" onclick="addReaction(this)">🗣️ <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">🔍 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">⭐ <span class="emoji-counter">0</span></button>
             </div>
         </section>
 
-        <!-- SECCIÓN TIPOS DE LICENCIAS -->
-        <section id="tipos" class="content-section">
-            <div class="hero-card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-                <h2>2.3 Tipos de Licencias</h2>
-                <p>Clasificación detallada de los esquemas de licenciamiento más comunes en el mercado y la industria de desarrollo.</p>
-            </div>
+        <!-- HERRAMIENTAS PARA CAPTURA -->
+        <section id="herramientas" class="section-content">
+            <h2>1.3. Herramientas para captura de requisitos</h2>
+            <p>Existen varias herramientas para la captura de requisitos potenciales de un nuevo sistema o una actualización de software, a continuación, se explican las más utilizadas:</p>
+            
+            <h3>1.3.1. Diagrama de casos de uso</h3>
+            <p>Al momento de desarrollar un proyecto se debe pensar en cuáles serán las principales funcionalidades que el software debe permitir llevar a cabo y quiénes serán los que podrán ejecutar dichas funcionalidades. La identificación de estos elementos se puede visualizar de manera efectiva a través de la elaboración de diagramas de casos de uso; estos diagramas, que son elaborados durante las etapas iniciales de un proyecto, se convierten en referente para cada una de las etapas siguientes del desarrollo del proyecto.</p>
+            
+            <p><strong>Componentes:</strong> En los diagramas de casos de uso, se observan los siguientes componentes:</p>
+            <ul>
+                <li><strong>Actor:</strong> Se representa mediante un “hombre de palo”. Este se emplea para indicar el tipo de usuario del sistema que podrá ejecutar alguna función.</li>
+            </ul>
 
-            <div class="grid-2">
-                <div class="card">
-                    <h3>Licencia de software freeware</h3>
-                    <p>Son aquellas que permiten descargar, instalar y/o usar gratuitamente un programa para computador.</p>
-                    <p style="margin-top: 0.5rem;">Para este tipo de licencia, el usuario no necesita suscribirse ni registrarse o comprar alguna licencia. Este tipo de licencia permite tener acceso al código objeto, mas no al código fuente.</p>
-                    
-                    <h4 style="margin-top: 1rem; color: var(--text-dark);">Ejemplo Destacado:</h4>
-                    <div class="badge-container">
-                        <span class="badge" style="background-color: #fef3c7; color: #d97706;">Antivirus Avast</span>
-                    </div>
-                    <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #64748b;">Permite su descarga gratuitamente de Internet.</p>
-                    
-                    <div class="emoji-container">
-                        <span class="emoji-display">🛡️🆓</span>
-                        <span class="emoji-caption">Uso Gratuito Sin Código Fuente</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Licencias de software libre o software de código abierto</h3>
-                    <p>En este tipo de licencia los desarrolladores, generalmente, dan acceso abierto al código fuente de su software. Existen diferentes licencias creadas por las organizaciones.</p>
-                    
-                    <div style="background-color: #f1f5f9; padding: 1rem; border-radius: 8px; margin-top: 0.75rem; border-left: 3px solid var(--accent);">
-                        <strong style="color: var(--text-dark);">GNU GPL (General Public License):</strong> Licencia de derecho de autor ampliamente usada en el mundo del software libre y código abierto, y avala a los usuarios finales (personas, organizaciones, compañías) la libertad de utilizar, analizar, compartir (copiar) y modificar el software.
-                    </div>
-
-                    <h4 style="margin-top: 1rem; color: var(--text-dark);">Ejemplos:</h4>
-                    <div class="badge-container">
-                        <span class="badge">Android</span>
-                        <span class="badge">Mozilla</span>
-                        <span class="badge">Linux</span>
-                        <span class="badge">WordPress</span>
-                        <span class="badge">Chromium</span>
-                    </div>
-                    
-                    <div class="emoji-container">
-                        <span class="emoji-display">🤖🐧🔓</span>
-                        <span class="emoji-caption">Ecosistema Abierto Compartido</span>
-                    </div>
-                </div>
+            <div class="emoji-feedback">
+                <p>¿Qué tal te pareció esta sección?</p>
+                <button class="emoji-btn" onclick="addReaction(this)">⚙️ <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">👤 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">📊 <span class="emoji-counter">0</span></button>
             </div>
         </section>
 
-        <!-- SECCIÓN DERECHOS DE AUTOR -->
-        <section id="derechos" class="content-section">
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>2.4 Derechos de Autor</h3>
-                <p>Se refiere a todas las obras artísticas, literarias, o científicas que son protegidas por el derecho de autor durante cierto periodo de tiempo, por el solo hecho de la creación de la obra. La entidad <strong>DNDA (Dirección Nacional de Derechos de Autor)</strong> en Colombia es la que se encarga de proteger todas estas obras.</p>
-                <p style="margin-top: 0.5rem;">Cuando el software está protegido por medio del derecho de autor, se deben establecer qué usos serán permitidos realizar por parte del usuario.</p>
-                
-                <h4 style="margin-top: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem;">Usos autorizados comúnmente:</h4>
-                <ul class="interactive-list" style="border-color: var(--accent);">
-                    <li>La ejecución del código del software, bien sea en dispositivos de almacenamiento o en el disco local del equipo donde se instalará el software.</li>
-                    <li>Es esencial que en la licencia quede estipulado el plazo en el que se está concediendo la licencia y el territorio para el que se concede.</li>
-                    <li>La posibilidad de distribución del software (realizar nuevas copias y comercializarlas a terceros).</li>
-                </ul>
+        <!-- HERRAMIENTAS DE MODELADO -->
+        <section id="modelado" class="section-content">
+            <h2>1.4. Herramientas de modelado</h2>
+            <p>Estas herramientas permiten crear un "simulacro" del sistema.</p>
+            <p>Las herramientas de modelado de sistemas informáticos se emplean para la creación de modelos de sistemas que ya existen o que se desarrollarán; estas herramientas permiten crear un "simulacro" del sistema, a bajo coste y riesgo mínimo. A bajo costo porque, es un conjunto de gráficos y textos que representan el sistema.</p>
+            <p>El Lenguaje Unificado de Modelado (UML, por sus siglas en inglés, Unified Modeling Language) es el lenguaje de modelado de sistemas de software más conocido y utilizado en la actualidad; UML es un lenguaje gráfico que permite especificar, modelar, construir y documentar los elements que forman un sistema software.</p>
+            <p>De otra parte, las herramientas CASE son un conjunto de programas y procesos “guiados”, que ayudan a los analistas, desarrolladores, ingenieros de software y diseñadores en una o todas las etapas que comprende un ciclo de vida, con el objetivo de facilitar el desarrollo de software. El objetivo general de estas herramientas es acelerar el proceso para el que han sido diseñadas, es decir, para automatizar o apoyar una o más fases del ciclo de vida del desarrollo de sistemas. CASE proporciona un conjunto de herramientas semiautomatizadas y automatizadas que están creando una nueva cultura de ingeniería en muchas empresas. Las herramientas CASE se diseñaron para aumentar la productividad en el desarrollo de software y reducir su costo.</p>
 
-                <div class="emoji-container" style="border-color: var(--accent);">
-                    <span class="emoji-display">🏢🔒🛡️</span>
-                    <span class="emoji-caption">Protección Institucional - DNDA Colombia</span>
-                </div>
+            <div class="emoji-feedback">
+                <p>¿Qué tal te pareció esta sección?</p>
+                <button class="emoji-btn" onclick="addReaction(this)">💻 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">📐 <span class="emoji-counter">0</span></button>
+                <button class="emoji-btn" onclick="addReaction(this)">🚀 <span class="emoji-counter">0</span></button>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>trabajo ADSO 2026</p>
+        trabajo ADSO 2026
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const links = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.content-section');
+        function switchTab(event, sectionId) {
+            event.preventDefault();
+            
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Desactivar todos los enlaces de navegación
+            const navLinks = document.querySelectorAll('.nav-container li a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Mostrar la sección seleccionada y activar su pestaña
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
 
-            links.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Remover clases activas de la navegación
-                    links.forEach(l => l.classList.remove('active'));
-                    // Añadir clase activa al link seleccionado
-                    link.classList.add('active');
+            // Hacer scroll suave hacia arriba de la sección
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-                    // Ocultar todas las secciones
-                    sections.forEach(section => section.classList.remove('active'));
-                    
-                    // Mostrar sección objetivo
-                    const targetId = link.getAttribute('data-target');
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.classList.add('active');
-                        // Scroll suave hacia arriba al cambiar de pestaña
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                });
-            });
-        });
+        function addReaction(button) {
+            const counterSpan = button.querySelector('.emoji-counter');
+            let count = parseInt(counterSpan.innerText);
+            count++;
+            counterSpan.innerText = count;
+            
+            // Pequeño efecto visual al hacer click
+            button.style.transform = 'scale(1.4)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 200);
+        }
     </script>
 </body>
 </html>
