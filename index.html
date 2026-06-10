@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licencias de Software - Trabajo ADSO 2026</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --accent-light: #ef4444;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+            background-color: var(--accent);
+        }
+
+        /* Main Layout */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Sections Handling (Interactive SPA) */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards & Content Styling */
+        .hero-card {
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-card p {
+            color: #e2e8f0;
+            max-width: 800px;
+            font-size: 1.1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+        }
+
+        /* New Emoji Container Styles */
+        .emoji-container {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .emoji-display {
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+            display: block;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+        }
+
+        .emoji-caption {
+            display: block;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* List Styling for Freedoms and Criteria */
+        .interactive-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .interactive-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            background: #f8fafc;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border-radius: 8px;
+            border-left: 3px solid #10b981;
+        }
+
+        .interactive-list li strong {
+            color: var(--text-dark);
+            display: inline-block;
+            margin-right: 0.25rem;
+        }
+
+        .interactive-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Specific Highlight for Law Section */
+        .law-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .law-box::after {
+            content: "§";
+            position: absolute;
+            right: 2rem;
+            bottom: -2rem;
+            font-size: 10rem;
+            color: #dcfce7;
+            font-weight: bold;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .law-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .law-badge {
+            background-color: #16a34a;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Badges for examples */
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: #94a3b8;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .hero-card h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>Licencias de <span>Software</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-target="inicio">Inicio</a></li>
+                    <li><a href="#" class="nav-link" data-target="filosofia">Filosofía de Distribución</a></li>
+                    <li><a href="#" class="nav-link" data-target="normativa">Normativa Colombia</a></li>
+                    <li><a href="#" class="nav-link" data-target="tipos">Tipos de Licencias</a></li>
+                    <li><a href="#" class="nav-link" data-target="derechos">Derechos de Autor</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN INICIO -->
+        <section id="inicio" class="content-section active">
+            <div class="hero-card">
+                <h2>Introducción al Licenciamiento</h2>
+                <p>Descubre los fundamentos legales, derechos y deberes que rigen el uso, modificación y distribución del software a nivel nacional e internacional de forma ordenada y cronológica.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Licencia de Software</h3>
+                    <p>Cuando se realiza un convenio o contrato entre un desarrollador y un usuario y para el cual el software está sujeto a una propiedad intelectual y derechos de autor, se dice que estamos hablando de una licencia. En ella se establecen detalladamente los derechos y deberes de ambas partes. Depende del desarrollador la selección de la licencia de distribución del software.</p>
+                    <div class="emoji-container">
+                        <span class="emoji-display">📜✍️</span>
+                        <span class="emoji-caption">Convenio y Contrato Legal</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Patente</h3>
+                    <p>Se trata de un derecho exclusivo que proporciona el Estado para la protección de una invención de un nuevo producto (material o inmaterial) dispuesto para ser explotado comercialmente a conveniencia del solicitante por un periodo de tiempo limitado.</p>
+                    <div class="emoji-container">
+                        <span class="emoji-display">💡🛠️</span>
+                        <span class="emoji-caption">Protección de Invenciones</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3>Derecho de autor o copyright</h3>
+                <p>Forma de protección proporcionada por las leyes vigentes in la mayoría de los países para los autores de obras originales, incluyendo obras literarias, dramáticas, musicales, artísticas e intelectuales, tanto publicadas como pendientes de publicar.</p>
+                <div class="emoji-container">
+                    <span class="emoji-display">©️⚖️</span>
+                    <span class="emoji-caption">Protección a Obras Originales</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN FILOSOFÍA DE DISTRIBUCIÓN -->
+        <section id="filosofia" class="content-section">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Software Libre</h3>
+                    <p>Permite la libertad absoluta orientada a la comunidad mediante cuatro libertades esenciales:</p>
+                    <ul class="interactive-list">
+                        <li><strong>Correr:</strong> programas para cualquier uso.</li>
+                        <li><strong>Analizar:</strong> el funcionamiento del programa y modificarlo de acuerdo con sus necesidades.</li>
+                        <li><strong>Redistribuir:</strong> copias de la obra.</li>
+                        <li><strong>Realizar y aplicar mejoras:</strong> al programa para beneficio de toda la comunidad.</li>
+                    </ul>
+                    <div class="emoji-container">
+                        <span class="emoji-display">🔓🕊️</span>
+                        <span class="emoji-caption">Las 4 Libertades Comunitarias</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Software de Fuente Abierta</h3>
+                    <p>Enfoque metodológico con estrictos criterios de distribución definidos:</p>
+                    <ul class="interactive-list" style="border-color: #3b82f6;">
+                        <li><strong>Libre distribución:</strong> Transmisión sin restricciones comerciales.</li>
+                        <li><strong>Intervención del código fuente:</strong> Acceso completo para auditorías y cambios.</li>
+                        <li><strong>Permitir modificaciones:</strong> Admite trabajos derivados bajo las mismas condiciones originales.</li>
+                        <li><strong>Integrar sin discriminación:</strong> No restringe el acceso a personas o grupos específicos.</li>
+                        <li><strong>Tecnológicamente neutral:</strong> La licencia no se supedita a ninguna tecnología o interfaz.</li>
+                    </ul>
+                    <div class="emoji-container">
+                        <span class="emoji-display">🌐💻</span>
+                        <span class="emoji-caption">Criterios de Código Abierto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN NORMATIVA COLOMBIA -->
+        <section id="normativa" class="content-section">
+            <div class="law-box">
+                <div class="law-content">
+                    <span class="law-badge">Marco Legal Nacional</span>
+                    <h3>2.2. Normativa Obligatoria</h3>
+                    <p style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-dark);">Cuando se realiza la implementación de un software, su uso debe estar regido por una normatividad que evitará futuras sanciones o multas.</p>
+                    
+                    <div style="background-color: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a34a; margin-top: 1.5rem;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 0.5rem;">¿Cumple con la LEY 603?</h4>
+                        <p>En Colombia, la ley que regula las licencias de software es la <strong>Ley 603 de 2000</strong>, la cual recibe el nombre de <strong>Ley para el cumplimiento de las licencias de software</strong>.</p>
+                    </div>
+                </div>
+                <div class="emoji-container" style="background-color: white; margin-top: 2rem;">
+                    <span class="emoji-display">🇨🇴⚖️</span>
+                    <span class="emoji-caption">Ley 603 de 2000 - Colombia</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN TIPOS DE LICENCIAS -->
+        <section id="tipos" class="content-section">
+            <div class="hero-card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+                <h2>2.3 Tipos de Licencias</h2>
+                <p>Clasificación detallada de los esquemas de licenciamiento más comunes en el mercado y la industria de desarrollo.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Licencia de software freeware</h3>
+                    <p>Son aquellas que permiten descargar, instalar y/o usar gratuitamente un programa para computador.</p>
+                    <p style="margin-top: 0.5rem;">Para este tipo de licencia, el usuario no necesita suscribirse ni registrarse o comprar alguna licencia. Este tipo de licencia permite tener acceso al código objeto, mas no al código fuente.</p>
+                    
+                    <h4 style="margin-top: 1rem; color: var(--text-dark);">Ejemplo Destacado:</h4>
+                    <div class="badge-container">
+                        <span class="badge" style="background-color: #fef3c7; color: #d97706;">Antivirus Avast</span>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #64748b;">Permite su descarga gratuitamente de Internet.</p>
+                    
+                    <div class="emoji-container">
+                        <span class="emoji-display">🛡️🆓</span>
+                        <span class="emoji-caption">Uso Gratuito Sin Código Fuente</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Licencias de software libre o software de código abierto</h3>
+                    <p>En este tipo de licencia los desarrolladores, generalmente, dan acceso abierto al código fuente de su software. Existen diferentes licencias creadas por las organizaciones.</p>
+                    
+                    <div style="background-color: #f1f5f9; padding: 1rem; border-radius: 8px; margin-top: 0.75rem; border-left: 3px solid var(--accent);">
+                        <strong style="color: var(--text-dark);">GNU GPL (General Public License):</strong> Licencia de derecho de autor ampliamente usada en el mundo del software libre y código abierto, y avala a los usuarios finales (personas, organizaciones, compañías) la libertad de utilizar, analizar, compartir (copiar) y modificar el software.
+                    </div>
+
+                    <h4 style="margin-top: 1rem; color: var(--text-dark);">Ejemplos:</h4>
+                    <div class="badge-container">
+                        <span class="badge">Android</span>
+                        <span class="badge">Mozilla</span>
+                        <span class="badge">Linux</span>
+                        <span class="badge">WordPress</span>
+                        <span class="badge">Chromium</span>
+                    </div>
+                    
+                    <div class="emoji-container">
+                        <span class="emoji-display">🤖🐧🔓</span>
+                        <span class="emoji-caption">Ecosistema Abierto Compartido</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DERECHOS DE AUTOR -->
+        <section id="derechos" class="content-section">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3>2.4 Derechos de Autor</h3>
+                <p>Se refiere a todas las obras artísticas, literarias, o científicas que son protegidas por el derecho de autor durante cierto periodo de tiempo, por el solo hecho de la creación de la obra. La entidad <strong>DNDA (Dirección Nacional de Derechos de Autor)</strong> en Colombia es la que se encarga de proteger todas estas obras.</p>
+                <p style="margin-top: 0.5rem;">Cuando el software está protegido por medio del derecho de autor, se deben establecer qué usos serán permitidos realizar por parte del usuario.</p>
+                
+                <h4 style="margin-top: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem;">Usos autorizados comúnmente:</h4>
+                <ul class="interactive-list" style="border-color: var(--accent);">
+                    <li>La ejecución del código del software, bien sea en dispositivos de almacenamiento o en el disco local del equipo donde se instalará el software.</li>
+                    <li>Es esencial que en la licencia quede estipulado el plazo en el que se está concediendo la licencia y el territorio para el que se concede.</li>
+                    <li>La posibilidad de distribución del software (realizar nuevas copias y comercializarlas a terceros).</li>
+                </ul>
+
+                <div class="emoji-container" style="border-color: var(--accent);">
+                    <span class="emoji-display">🏢🔒🛡️</span>
+                    <span class="emoji-caption">Protección Institucional - DNDA Colombia</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>trabajo ADSO 2026</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remover clases activas de la navegación
+                    links.forEach(l => l.classList.remove('active'));
+                    // Añadir clase activa al link seleccionado
+                    link.classList.add('active');
+
+                    // Ocultar todas las secciones
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Mostrar sección objetivo
+                    const targetId = link.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                        // Scroll suave hacia arriba al cambiar de pestaña
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
